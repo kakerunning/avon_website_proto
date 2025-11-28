@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-avon-yellow text-avon-black px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-avon-yellow text-avon-yellow px-6 py-2 rounded-full font-bold hover:bg-avon-yellow hover:text-avon-black transition-colors;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold text-avon-black mb-8 text-center;
+  }
+
+  .card {
+    @apply bg-avon-black rounded-lg overflow-hidden shadow-lg;
+  }
+}
+
+/* Hide scrollbar */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+}
+
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
