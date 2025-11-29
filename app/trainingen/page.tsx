@@ -91,8 +91,24 @@ const Trainingen = () => {
     ],
   };
 
-  const toggleDay = (day: string) => {
+  const toggleDay = (day: string, e?: React.MouseEvent | React.TouchEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setOpenDay(openDay === day ? null : day);
+  };
+
+  const handleButtonClick = (day: string, e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleDay(day, e);
+  };
+
+  const handleButtonTouch = (day: string, e: React.TouchEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleDay(day, e);
   };
 
   return (
@@ -146,7 +162,7 @@ const Trainingen = () => {
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-avon-black mb-6">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-avon-black mb-8 text-center px-2">
                   Onze Trainingsmethode
                 </h2>
                 <p className="text-gray-700 text-lg leading-relaxed mb-4">
@@ -189,7 +205,7 @@ const Trainingen = () => {
           }}
           className={mounted ? "fade-in mb-16" : "mb-16"}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-avon-black mb-8 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-avon-black mb-8 text-center px-2">
             Onze Trainingscategorieën
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
@@ -311,7 +327,7 @@ const Trainingen = () => {
           className={mounted ? "fade-in mb-16" : "mb-16"}
         >
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
-            <h2 className="text-3xl md:text-4xl font-bold text-avon-black mb-8 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-avon-black mb-8 text-center px-2">
               Trainingskalender
             </h2>
             <p className="text-gray-600 text-center mb-8 max-w-2xl mx-auto">
@@ -320,18 +336,32 @@ const Trainingen = () => {
             
             <div className="space-y-4">
               {Object.entries(trainingSchedule).map(([day, sessions]) => (
-                <div key={day} className="border border-gray-200 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                <div 
+                  key={day} 
+                  className="border border-gray-200 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <button
-                    onClick={() => toggleDay(day)}
-                    className="w-full flex justify-between items-center px-6 py-4 bg-gradient-to-r from-avon-black to-gray-900 text-white hover:from-gray-900 hover:to-avon-black transition-all"
+                    type="button"
+                    onClick={(e) => handleButtonClick(day, e)}
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    onTouchStart={(e) => handleButtonTouch(day, e)}
+                    onTouchEnd={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    className="w-full flex justify-between items-center px-4 sm:px-6 py-4 bg-gradient-to-r from-avon-black to-gray-900 text-white hover:from-gray-900 hover:to-avon-black transition-all cursor-pointer"
                   >
-                    <span className="text-xl font-bold">{day}</span>
-                    <div className="flex items-center gap-4">
-                      <span className="text-sm text-gray-300">{sessions.length} training{sessions.length !== 1 ? 'en' : ''}</span>
+                    <span className="text-lg sm:text-xl font-bold">{day}</span>
+                    <div className="flex items-center gap-2 sm:gap-4">
+                      <span className="hidden md:inline text-sm text-gray-300">{sessions.length} training{sessions.length !== 1 ? 'en' : ''}</span>
                       {openDay === day ? (
-                        <FaChevronUp className="text-avon-yellow" />
+                        <FaChevronUp className="text-avon-yellow text-xl sm:text-lg flex-shrink-0" />
                       ) : (
-                        <FaChevronDown className="text-avon-yellow" />
+                        <FaChevronDown className="text-avon-yellow text-xl sm:text-lg flex-shrink-0" />
                       )}
                     </div>
                   </button>

@@ -97,57 +97,53 @@ export default function HomeClient({ data }: HomeClientProps) {
           <div className='absolute inset-0 bg-gradient-to-r from-avon-black to-transparent'></div>
         </div>
         <div className='relative max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-full flex items-center'>
-          <div className='text-center md:text-left max-w-2xl flex flex-col items-center md:block'>
+          <div className='text-center md:text-left max-w-2xl flex flex-col items-center md:block w-full'>
             <motion.h1
-              initial={mounted ? { opacity: 0, y: 20 } : false}
-              animate={mounted ? { opacity: 1, y: 0 } : false}
+              initial={{ opacity: 0, y: 20 }}
+              animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className='text-5xl md:text-7xl font-bold text-avon-white mb-4'
-              suppressHydrationWarning
+              className='text-4xl md:text-7xl font-bold text-avon-white mb-3 md:mb-4'
             >
               AVON Heerlen
             </motion.h1>
             <motion.p
-              initial={mounted ? { opacity: 0, y: 20 } : false}
-              animate={mounted ? { opacity: 1, y: 0 } : false}
+              initial={{ opacity: 0, y: 20 }}
+              animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className='text-2xl md:text-3xl text-avon-yellow mb-6'
-              suppressHydrationWarning
+              className='hidden md:block text-2xl md:text-3xl text-avon-yellow mb-6'
             >
               De oudste atletiekvereniging van Limburg – sinds 1924
             </motion.p>
             <motion.p
-              initial={mounted ? { opacity: 0, y: 20 } : false}
-              animate={mounted ? { opacity: 1, y: 0 } : false}
+              initial={{ opacity: 0, y: 20 }}
+              animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className='text-xl text-avon-white mb-8'
-              suppressHydrationWarning
+              className='hidden md:block text-xl text-avon-white mb-8'
             >
               Waar de geschiedenis van atletiek begon. Een eeuw vol sportieve
               verhalen.
             </motion.p>
             <motion.div
-              initial={mounted ? { opacity: 0, y: 20 } : false}
-              animate={mounted ? { opacity: 1, y: 0 } : false}
+              initial={{ opacity: 0, y: 20 }}
+              animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className='flex flex-col gap-3 w-full max-w-sm mx-auto sm:max-w-none sm:flex-row sm:justify-center md:justify-start md:mx-0'
-              suppressHydrationWarning
+              className='flex flex-col gap-2 md:gap-3 w-full max-w-sm mx-auto sm:max-w-none sm:flex-row sm:justify-center md:justify-start md:mx-0'
             >
               <Link
                 href='/contact'
-                className='bg-avon-yellow text-avon-black px-6 py-3 rounded-full font-bold hover:bg-opacity-90 transition-colors text-center w-full sm:w-auto sm:px-8'
+                className='bg-avon-yellow text-avon-black px-6 py-2.5 md:py-3 rounded-full font-bold hover:bg-opacity-90 transition-colors text-center w-full sm:w-auto sm:px-8 text-sm md:text-base'
               >
                 Aanmelden
               </Link>
               <Link
                 href='/over-ons'
-                className='border-2 border-avon-yellow text-avon-yellow px-6 py-3 rounded-full font-bold hover:bg-avon-yellow hover:text-avon-black transition-colors text-center w-full sm:w-auto sm:px-8'
+                className='border-2 border-avon-yellow text-avon-yellow px-6 py-2.5 md:py-3 rounded-full font-bold hover:bg-avon-yellow hover:text-avon-black transition-colors text-center w-full sm:w-auto sm:px-8 text-sm md:text-base'
               >
                 Over ons
               </Link>
               <Link
                 href='/contact'
-                className='border-2 border-avon-yellow text-avon-yellow px-6 py-3 rounded-full font-bold hover:bg-avon-yellow hover:text-avon-black transition-colors text-center w-full sm:w-auto sm:px-8'
+                className='border-2 border-avon-yellow text-avon-yellow px-6 py-2.5 md:py-3 rounded-full font-bold hover:bg-avon-yellow hover:text-avon-black transition-colors text-center w-full sm:w-auto sm:px-8 text-sm md:text-base'
               >
                 Contact
               </Link>
@@ -249,12 +245,11 @@ export default function HomeClient({ data }: HomeClientProps) {
         <div className='max-w-7xl mx-auto px-2 sm:px-4 lg:px-8'>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center'>
             <motion.div
-              initial={mounted ? { opacity: 0, x: -20 } : false}
-              whileInView={mounted ? { opacity: 1, x: 0 } : undefined}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={mounted ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
               className='relative h-96 rounded-lg overflow-hidden shadow-xl'
-              suppressHydrationWarning
             >
               <Image
                 src='/images/entrance.jpeg'
@@ -264,11 +259,10 @@ export default function HomeClient({ data }: HomeClientProps) {
               />
             </motion.div>
             <motion.div
-              initial={mounted ? { opacity: 0, x: 20 } : false}
-              whileInView={mounted ? { opacity: 1, x: 0 } : undefined}
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={mounted ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              suppressHydrationWarning
             >
               <h2 className='text-3xl font-bold text-avon-black mb-4'>
                 Over AVON Heerlen
@@ -309,12 +303,11 @@ export default function HomeClient({ data }: HomeClientProps) {
           </div>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
             <motion.div
-              initial={mounted ? { opacity: 0, y: 20 } : false}
-              whileInView={mounted ? { opacity: 1, y: 0 } : undefined}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
               className='text-center'
-              suppressHydrationWarning
             >
               <div className='bg-avon-black rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4'>
                 <FaHistory className='text-avon-yellow text-2xl' />
@@ -328,12 +321,11 @@ export default function HomeClient({ data }: HomeClientProps) {
               </p>
             </motion.div>
             <motion.div
-              initial={mounted ? { opacity: 0, y: 20 } : false}
-              whileInView={mounted ? { opacity: 1, y: 0 } : undefined}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
               className='text-center'
-              suppressHydrationWarning
             >
               <div className='bg-avon-black rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4'>
                 <FaTrophy className='text-avon-yellow text-2xl' />
@@ -347,12 +339,11 @@ export default function HomeClient({ data }: HomeClientProps) {
               </p>
             </motion.div>
             <motion.div
-              initial={mounted ? { opacity: 0, y: 20 } : false}
-              whileInView={mounted ? { opacity: 1, y: 0 } : undefined}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
               className='text-center'
-              suppressHydrationWarning
             >
               <div className='bg-avon-black rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4'>
                 <FaUsers className='text-avon-yellow text-2xl' />
@@ -366,12 +357,11 @@ export default function HomeClient({ data }: HomeClientProps) {
               </p>
             </motion.div>
             <motion.div
-              initial={mounted ? { opacity: 0, y: 20 } : false}
-              whileInView={mounted ? { opacity: 1, y: 0 } : undefined}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
               className='text-center'
-              suppressHydrationWarning
             >
               <div className='bg-avon-black rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4'>
                 <FaRunning className='text-avon-yellow text-2xl' />
