@@ -18,6 +18,7 @@ const Trainingen = () => {
   const [openDay, setOpenDay] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const fadeInElementsRef = useRef<(HTMLElement | null)[]>([]);
+  const touchHandledRef = useRef<boolean>(false);
 
   useEffect(() => {
     setMounted(true);
@@ -100,15 +101,32 @@ const Trainingen = () => {
   };
 
   const handleButtonClick = (day: string, e: React.MouseEvent<HTMLButtonElement>) => {
+    // タッチイベントが既に処理された場合はクリックイベントを無視
+    if (touchHandledRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      touchHandledRef.current = false;
+      return;
+    }
     e.preventDefault();
     e.stopPropagation();
     toggleDay(day, e);
   };
 
-  const handleButtonTouch = (day: string, e: React.TouchEvent<HTMLButtonElement>) => {
+  const handleButtonTouchStart = (day: string, e: React.TouchEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    touchHandledRef.current = true;
+  };
+
+  const handleButtonTouchEnd = (day: string, e: React.TouchEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
     toggleDay(day, e);
+    // クリックイベントが発火しないように少し遅延
+    setTimeout(() => {
+      touchHandledRef.current = false;
+    }, 300);
   };
 
   return (
@@ -339,7 +357,13 @@ const Trainingen = () => {
                 <div 
                   key={day} 
                   className="border border-gray-200 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                  onTouchStart={(e) => {
+                    e.stopPropagation();
+                  }}
                 >
                   <button
                     type="button"
@@ -348,12 +372,15 @@ const Trainingen = () => {
                       e.preventDefault();
                       e.stopPropagation();
                     }}
-                    onTouchStart={(e) => handleButtonTouch(day, e)}
-                    onTouchEnd={(e) => {
+                    onTouchStart={(e) => handleButtonTouchStart(day, e)}
+                    onTouchEnd={(e) => handleButtonTouchEnd(day, e)}
+                    onTouchCancel={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
+                      touchHandledRef.current = false;
                     }}
-                    className="w-full flex justify-between items-center px-4 sm:px-6 py-4 bg-gradient-to-r from-avon-black to-gray-900 text-white hover:from-gray-900 hover:to-avon-black transition-all cursor-pointer"
+                    className="w-full flex justify-between items-center px-4 sm:px-6 py-4 bg-gradient-to-r from-avon-black to-gray-900 text-white hover:from-gray-900 hover:to-avon-black transition-all cursor-pointer select-none"
+                    style={{ touchAction: 'manipulation' }}
                   >
                     <span className="text-lg sm:text-xl font-bold">{day}</span>
                     <div className="flex items-center gap-2 sm:gap-4">
