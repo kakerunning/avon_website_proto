@@ -250,7 +250,7 @@ export default function HomeClient({ data }: HomeClientProps) {
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center'>
             <motion.div
               initial={mounted ? { opacity: 0, x: -20 } : false}
-              whileInView={mounted ? { opacity: 1, x: 0 } : false}
+              whileInView={mounted ? { opacity: 1, x: 0 } : undefined}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
               className='relative h-96 rounded-lg overflow-hidden shadow-xl'
@@ -265,7 +265,7 @@ export default function HomeClient({ data }: HomeClientProps) {
             </motion.div>
             <motion.div
               initial={mounted ? { opacity: 0, x: 20 } : false}
-              whileInView={mounted ? { opacity: 1, x: 0 } : false}
+              whileInView={mounted ? { opacity: 1, x: 0 } : undefined}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
               suppressHydrationWarning
@@ -310,7 +310,7 @@ export default function HomeClient({ data }: HomeClientProps) {
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
             <motion.div
               initial={mounted ? { opacity: 0, y: 20 } : false}
-              whileInView={mounted ? { opacity: 1, y: 0 } : false}
+              whileInView={mounted ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
               className='text-center'
@@ -329,7 +329,7 @@ export default function HomeClient({ data }: HomeClientProps) {
             </motion.div>
             <motion.div
               initial={mounted ? { opacity: 0, y: 20 } : false}
-              whileInView={mounted ? { opacity: 1, y: 0 } : false}
+              whileInView={mounted ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
               className='text-center'
@@ -348,7 +348,7 @@ export default function HomeClient({ data }: HomeClientProps) {
             </motion.div>
             <motion.div
               initial={mounted ? { opacity: 0, y: 20 } : false}
-              whileInView={mounted ? { opacity: 1, y: 0 } : false}
+              whileInView={mounted ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
               className='text-center'
@@ -367,7 +367,7 @@ export default function HomeClient({ data }: HomeClientProps) {
             </motion.div>
             <motion.div
               initial={mounted ? { opacity: 0, y: 20 } : false}
-              whileInView={mounted ? { opacity: 1, y: 0 } : false}
+              whileInView={mounted ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
               className='text-center'
