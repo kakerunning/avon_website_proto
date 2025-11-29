@@ -29,7 +29,7 @@ const NewsCard = (props: SinglePostProps) =>  {
   return (
     <motion.div
       initial={mounted ? { opacity: 0, y: 20 } : false}
-      whileInView={mounted ? { opacity: 1, y: 0 } : false}
+      whileInView={mounted ? { opacity: 1, y: 0 } : undefined}
       transition={{ duration: 0.5}}
       viewport={{ once: true }}
       className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group h-full flex flex-col"
