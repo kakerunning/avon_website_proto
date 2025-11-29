@@ -130,24 +130,24 @@ export default function HomeClient({ data }: HomeClientProps) {
               initial={mounted ? { opacity: 0, y: 20 } : false}
               animate={mounted ? { opacity: 1, y: 0 } : false}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className='flex flex-col gap-4 w-full sm:flex-row sm:justify-center md:justify-start'
+              className='flex flex-col gap-3 w-full max-w-sm mx-auto sm:max-w-none sm:flex-row sm:justify-center md:justify-start md:mx-0'
               suppressHydrationWarning
             >
               <Link
                 href='/contact'
-                className='bg-avon-yellow text-avon-black px-8 py-3 rounded-full font-bold hover:bg-opacity-90 transition-colors text-center'
+                className='bg-avon-yellow text-avon-black px-6 py-3 rounded-full font-bold hover:bg-opacity-90 transition-colors text-center w-full sm:w-auto sm:px-8'
               >
                 Aanmelden
               </Link>
               <Link
                 href='/over-ons'
-                className='border-2 border-avon-yellow text-avon-yellow px-8 py-3 rounded-full font-bold hover:bg-avon-yellow hover:text-avon-black transition-colors text-center'
+                className='border-2 border-avon-yellow text-avon-yellow px-6 py-3 rounded-full font-bold hover:bg-avon-yellow hover:text-avon-black transition-colors text-center w-full sm:w-auto sm:px-8'
               >
                 Over ons
               </Link>
               <Link
                 href='/contact'
-                className='border-2 border-avon-yellow text-avon-yellow px-8 py-3 rounded-full font-bold hover:bg-avon-yellow hover:text-avon-black transition-colors text-center'
+                className='border-2 border-avon-yellow text-avon-yellow px-6 py-3 rounded-full font-bold hover:bg-avon-yellow hover:text-avon-black transition-colors text-center w-full sm:w-auto sm:px-8'
               >
                 Contact
               </Link>
