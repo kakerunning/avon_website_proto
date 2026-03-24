@@ -18,7 +18,6 @@ const Trainingen = () => {
   const [openDay, setOpenDay] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const fadeInElementsRef = useRef<(HTMLElement | null)[]>([]);
-  const touchHandledRef = useRef<boolean>(false);
 
   useEffect(() => {
     setMounted(true);
@@ -92,41 +91,12 @@ const Trainingen = () => {
     ],
   };
 
-  const toggleDay = (day: string, e?: React.MouseEvent | React.TouchEvent) => {
+  const toggleDay = (day: string, e?: React.MouseEvent) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
     setOpenDay(openDay === day ? null : day);
-  };
-
-  const handleButtonClick = (day: string, e: React.MouseEvent<HTMLButtonElement>) => {
-    // タッチイベントが既に処理された場合はクリックイベントを無視
-    if (touchHandledRef.current) {
-      e.preventDefault();
-      e.stopPropagation();
-      touchHandledRef.current = false;
-      return;
-    }
-    e.preventDefault();
-    e.stopPropagation();
-    toggleDay(day, e);
-  };
-
-  const handleButtonTouchStart = (day: string, e: React.TouchEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    touchHandledRef.current = true;
-  };
-
-  const handleButtonTouchEnd = (day: string, e: React.TouchEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleDay(day, e);
-    // クリックイベントが発火しないように少し遅延
-    setTimeout(() => {
-      touchHandledRef.current = false;
-    }, 300);
   };
 
   return (
@@ -354,41 +324,19 @@ const Trainingen = () => {
             
             <div className="space-y-4">
               {Object.entries(trainingSchedule).map(([day, sessions]) => (
-                <div 
-                  key={day} 
-                  className="border border-gray-200 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  }}
-                  onTouchStart={(e) => {
-                    e.stopPropagation();
-                  }}
-                >
+                <div key={day} className="border border-gray-200 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
                   <button
                     type="button"
-                    onClick={(e) => handleButtonClick(day, e)}
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
-                    onTouchStart={(e) => handleButtonTouchStart(day, e)}
-                    onTouchEnd={(e) => handleButtonTouchEnd(day, e)}
-                    onTouchCancel={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      touchHandledRef.current = false;
-                    }}
-                    className="w-full flex justify-between items-center px-4 sm:px-6 py-4 bg-gradient-to-r from-avon-black to-gray-900 text-white hover:from-gray-900 hover:to-avon-black transition-all cursor-pointer select-none"
-                    style={{ touchAction: 'manipulation' }}
+                    onClick={(e) => toggleDay(day, e)}
+                    className="w-full flex justify-between items-center px-6 py-4 bg-gradient-to-r from-avon-black to-gray-900 text-white hover:from-gray-900 hover:to-avon-black transition-all"
                   >
-                    <span className="text-lg sm:text-xl font-bold">{day}</span>
-                    <div className="flex items-center gap-2 sm:gap-4">
-                      <span className="hidden md:inline text-sm text-gray-300">{sessions.length} training{sessions.length !== 1 ? 'en' : ''}</span>
+                    <span className="text-xl font-bold">{day}</span>
+                    <div className="flex items-center gap-4">
+                      <span className="text-sm text-gray-300">{sessions.length} training{sessions.length !== 1 ? 'en' : ''}</span>
                       {openDay === day ? (
-                        <FaChevronUp className="text-avon-yellow text-xl sm:text-lg flex-shrink-0" />
+                        <FaChevronUp className="text-avon-yellow" />
                       ) : (
-                        <FaChevronDown className="text-avon-yellow text-xl sm:text-lg flex-shrink-0" />
+                        <FaChevronDown className="text-avon-yellow" />
                       )}
                     </div>
                   </button>

@@ -4,12 +4,13 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaCalendar, FaTag } from "react-icons/fa";
+import { FaCalendar, FaTag, FaRunning } from "react-icons/fa";
 import type { SinglePostProps } from "../../types";
 
 const NewsCard = (props: SinglePostProps) =>  {
   const { title, description, date, tags, slug, thumbnail} = props;
   const [mounted, setMounted] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -37,16 +38,18 @@ const NewsCard = (props: SinglePostProps) =>  {
     >
       <Link href={`/nieuws/${slug}`}>
         <div className="relative h-48 overflow-hidden">
-          {thumbnail ? (
+          {thumbnail && !imgError ? (
             <Image
               src={thumbnail}
               alt={`${title} thumbnail`}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
+              onError={() => setImgError(true)}
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-avon-black to-gray-800 flex items-center justify-center">
-              <span className="text-white text-lg font-semibold">AVON</span>
+            <div className="w-full h-full bg-gradient-to-br from-avon-black to-gray-800 flex flex-col items-center justify-center p-4 gap-2">
+              <FaRunning className="text-avon-yellow text-4xl" />
+              <span className="text-white text-sm font-semibold text-center leading-tight">{title}</span>
             </div>
           )}
           <div className="absolute top-4 left-4 flex flex-wrap gap-2">

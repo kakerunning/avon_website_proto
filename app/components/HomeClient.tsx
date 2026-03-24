@@ -131,19 +131,19 @@ export default function HomeClient({ data }: HomeClientProps) {
             >
               <Link
                 href='/contact'
-                className='bg-avon-yellow text-avon-black px-6 py-2.5 md:py-3 rounded-full font-bold hover:bg-opacity-90 transition-colors text-center w-full sm:w-auto sm:px-8 text-sm md:text-base'
+                className='btn-primary py-2.5 md:py-3 text-center w-full sm:w-auto sm:px-8 text-sm md:text-base'
               >
                 Aanmelden
               </Link>
               <Link
                 href='/over-ons'
-                className='border-2 border-avon-yellow text-avon-yellow px-6 py-2.5 md:py-3 rounded-full font-bold hover:bg-avon-yellow hover:text-avon-black transition-colors text-center w-full sm:w-auto sm:px-8 text-sm md:text-base'
+                className='btn-secondary py-2.5 md:py-3 text-center w-full sm:w-auto sm:px-8 text-sm md:text-base'
               >
                 Over ons
               </Link>
               <Link
                 href='/contact'
-                className='border-2 border-avon-yellow text-avon-yellow px-6 py-2.5 md:py-3 rounded-full font-bold hover:bg-avon-yellow hover:text-avon-black transition-colors text-center w-full sm:w-auto sm:px-8 text-sm md:text-base'
+                className='btn-secondary py-2.5 md:py-3 text-center w-full sm:w-auto sm:px-8 text-sm md:text-base'
               >
                 Contact
               </Link>
@@ -280,7 +280,7 @@ export default function HomeClient({ data }: HomeClientProps) {
               </p>
               <Link
                 href='/over-ons'
-                className='bg-avon-yellow text-avon-black px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition-colors inline-block'
+                className='btn-primary inline-block'
               >
                 Lees meer over ons
               </Link>
