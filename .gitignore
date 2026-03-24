@@ -75,3 +75,5 @@ logs
 .temp/
 tmp/
 
+#claude
+.claude
