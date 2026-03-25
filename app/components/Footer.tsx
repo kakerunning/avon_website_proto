@@ -10,15 +10,45 @@ import {
 
 const Footer = () => {
   return (
-    <footer className='bg-avon-black text-avon-white'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
-        <div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
-          {/* Contact Information */}
+    <footer className='bg-ink text-white'>
+      <div className='max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-8'>
+        {/* Top row: brand + CTA */}
+        <div className='flex flex-col sm:flex-row justify-between items-start gap-6 pb-12 border-b border-white/10'>
           <div>
-            <h3 className='text-avon-yellow font-bold text-lg mb-4'>Contact</h3>
-            <ul className='space-y-3'>
-              <li className='flex items-start'>
-                <FaMapMarkerAlt className='text-avon-yellow mt-1 mr-3 flex-shrink-0' />
+            <div
+              className='font-bold text-white uppercase leading-none mb-2'
+              style={{
+                fontFamily: "var(--font-barlow-condensed), sans-serif",
+                fontSize: "3.5rem",
+              }}
+            >
+              AVON
+            </div>
+            <div
+              className='text-gold text-xs uppercase tracking-[0.3em] font-semibold'
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              Heerlen · Sinds 1924
+            </div>
+          </div>
+          <Link href='/contact#aanmelden' className='btn-primary self-start mt-1'>
+            Word Lid
+          </Link>
+        </div>
+
+        {/* Main grid */}
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 py-12 border-b border-white/10'>
+          {/* Contact */}
+          <div>
+            <h4
+              className='text-gold text-xs uppercase tracking-[0.25em] mb-5 font-semibold'
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              Contact
+            </h4>
+            <ul className='space-y-3 text-white/55 text-sm'>
+              <li className='flex items-start gap-3'>
+                <FaMapMarkerAlt className='text-gold mt-1 flex-shrink-0' />
                 <span>
                   AVON Heerlen
                   <br />
@@ -27,87 +57,82 @@ const Footer = () => {
                   6419 XC Heerlen
                 </span>
               </li>
-              <li className='flex items-center'>
-                <FaPhone className='text-avon-yellow mr-3 flex-shrink-0' />
+              <li className='flex items-center gap-3'>
+                <FaPhone className='text-gold flex-shrink-0' />
                 <span>045-1234567</span>
               </li>
-              <li className='flex items-center'>
-                <FaEnvelope className='text-avon-yellow mr-3 flex-shrink-0' />
+              <li className='flex items-center gap-3'>
+                <FaEnvelope className='text-gold flex-shrink-0' />
                 <span>info@avonheerlen.nl</span>
               </li>
             </ul>
           </div>
 
-          {/* Quick Links */}
+          {/* Menu */}
           <div>
-            <h3 className='text-avon-yellow font-bold text-lg mb-4'>Menu</h3>
-            <ul className='space-y-2'>
-              <li>
-                <Link
-                  href='/wedstrijden'
-                  className='hover:text-avon-yellow transition-colors'
-                >
-                  Wedstrijden
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/leden'
-                  className='hover:text-avon-yellow transition-colors'
-                >
-                  Leden
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/nieuws'
-                  className='hover:text-avon-yellow transition-colors'
-                >
-                  Nieuws
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/contact'
-                  className='hover:text-avon-yellow transition-colors'
-                >
-                  Contact
-                </Link>
-              </li>
+            <h4
+              className='text-gold text-xs uppercase tracking-[0.25em] mb-5 font-semibold'
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              Menu
+            </h4>
+            <ul className='space-y-2 text-white/55 text-sm'>
+              {[
+                { label: "Wedstrijden", href: "/wedstrijden" },
+                { label: "Leden", href: "/leden" },
+                { label: "Nieuws", href: "/nieuws" },
+                { label: "Contact", href: "/contact" },
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className='hover:text-gold transition-colors'
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Training Times */}
+          {/* Training times */}
           <div>
-            <h3 className='text-avon-yellow font-bold text-lg mb-4'>Trainingstijden</h3>
-            <ul className='space-y-2'>
-              <li>
-                <span className='font-medium'>Maandag:</span> 18:00 - 21:00
-              </li>
-              <li>
-                <span className='font-medium'>Woensdag:</span> 18:00 - 21:00
-              </li>
-              <li>
-                <span className='font-medium'>Vrijdag:</span> 18:00 - 21:00
-              </li>
-              <li>
-                <span className='font-medium'>Zaterdag:</span> 09:00 - 12:00
-              </li>
-              <li>
-                <span className='font-medium'>Zondag:</span> 10:00 - 12:00
-              </li>
+            <h4
+              className='text-gold text-xs uppercase tracking-[0.25em] mb-5 font-semibold'
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              Trainingstijden
+            </h4>
+            <ul className='space-y-2 text-white/55 text-sm'>
+              {[
+                { day: "Maandag", time: "18:00 – 21:00" },
+                { day: "Woensdag", time: "18:00 – 21:00" },
+                { day: "Vrijdag", time: "18:00 – 21:00" },
+                { day: "Zaterdag", time: "09:00 – 12:00" },
+                { day: "Zondag", time: "10:00 – 12:00" },
+              ].map((t) => (
+                <li key={t.day} className='flex gap-3'>
+                  <span className='text-white/35 w-22 flex-shrink-0'>{t.day}</span>
+                  <span>{t.time}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Social Media & Word lid */}
+          {/* Social */}
           <div>
-            <h3 className='text-avon-yellow font-bold text-lg mb-4'>Volg ons</h3>
-            <div className='flex space-x-4 mb-6'>
+            <h4
+              className='text-gold text-xs uppercase tracking-[0.25em] mb-5 font-semibold'
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              Volg ons
+            </h4>
+            <div className='flex gap-4'>
               <a
                 href='https://facebook.com/avonheerlen'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-2xl hover:text-avon-yellow transition-colors'
+                className='text-white/55 hover:text-gold transition-colors text-xl'
               >
                 <FaFacebook />
               </a>
@@ -115,7 +140,7 @@ const Footer = () => {
                 href='https://instagram.com/avonheerlen'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-2xl hover:text-avon-yellow transition-colors'
+                className='text-white/55 hover:text-gold transition-colors text-xl'
               >
                 <FaInstagram />
               </a>
@@ -123,31 +148,25 @@ const Footer = () => {
                 href='https://twitter.com/avonheerlen'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-2xl hover:text-avon-yellow transition-colors'
+                className='text-white/55 hover:text-gold transition-colors text-xl'
               >
                 <FaTwitter />
               </a>
             </div>
-            <div className='mt-4'>
-              <h3 className='text-avon-yellow font-bold mb-2'>Word lid</h3>
-              <p className='mb-4'>
-                Interesse in atletiek? Word lid van AVON Heerlen en ontdek wat
-                atletiek voor jou kan betekenen.
-              </p>
-              <Link
-                href='/contact#aanmelden'
-                className='bg-avon-yellow text-avon-black px-4 py-2 rounded-full font-bold hover:bg-opacity-90 transition-colors inline-block'
-              >
-                Aanmelden
-              </Link>
-            </div>
           </div>
         </div>
 
-        <div className='mt-12 pt-8 border-t border-gray-700 text-center'>
+        {/* Bottom bar */}
+        <div className='pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-white/25 text-xs'>
           <p suppressHydrationWarning>
             &copy; {new Date().getFullYear()} AVON Heerlen. Alle rechten
             voorbehouden.
+          </p>
+          <p
+            className='uppercase tracking-widest'
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            Atletiekvereniging Heerlen
           </p>
         </div>
       </div>

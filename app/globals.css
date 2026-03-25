@@ -3,45 +3,68 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
+  --gold: #FFD700;
+  --ink: #0A0A0A;
+  --ash: #181818;
+  --smoke: #F4F2ED;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+  color: var(--ink);
+  background: #fff;
+  font-family: var(--font-barlow), sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-avon-yellow text-avon-black px-6 py-2 rounded-full font-bold hover:bg-opacity-90 transition-colors;
+    @apply bg-gold text-ink px-7 py-3 font-bold text-sm uppercase tracking-widest hover:brightness-90 transition-all duration-150 inline-block;
+    font-family: var(--font-barlow-condensed), sans-serif;
   }
 
   .btn-secondary {
-    @apply border-2 border-avon-yellow text-avon-yellow px-6 py-2 rounded-full font-bold hover:bg-avon-yellow hover:text-avon-black transition-colors;
+    @apply border-2 border-gold text-gold px-7 py-3 font-bold text-sm uppercase tracking-widest hover:bg-gold hover:text-ink transition-all duration-150 inline-block;
+    font-family: var(--font-barlow-condensed), sans-serif;
   }
 
   .section-title {
-    @apply text-3xl font-bold text-avon-black mb-8 text-center;
+    @apply text-5xl font-bold uppercase tracking-tight text-ink mb-8;
+    font-family: var(--font-barlow-condensed), sans-serif;
   }
 
   .card {
-    @apply bg-avon-black rounded-lg overflow-hidden shadow-lg;
+    @apply bg-ash overflow-hidden;
+  }
+
+  .eyebrow {
+    @apply flex items-center gap-3 mb-4;
+  }
+
+  .eyebrow::before {
+    content: '';
+    @apply block h-px w-8 bg-gold flex-shrink-0;
+  }
+
+  .eyebrow span {
+    @apply text-mid text-xs uppercase tracking-[0.25em] font-semibold;
+    font-family: var(--font-barlow-condensed), sans-serif;
   }
 }
 
-/* Hide scrollbar */
 @layer utilities {
   .scrollbar-hide {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   .scrollbar-hide::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
+    display: none;
   }
 }
 
-/* Fade-in animation */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);

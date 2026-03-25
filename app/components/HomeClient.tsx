@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaTrophy, FaMedal, FaRunning, FaUsers, FaHistory } from "react-icons/fa";
 import NewsCard from "./NewsCard";
 import { HomeProps } from "../../types";
 import { useState, useRef, useEffect } from "react";
@@ -12,7 +11,7 @@ interface HomeClientProps {
 }
 
 export default function HomeClient({ data }: HomeClientProps) {
-  const { fourposts, allTags } = data;
+  const { fourposts } = data;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -24,179 +23,235 @@ export default function HomeClient({ data }: HomeClientProps) {
     setMounted(true);
   }, []);
 
-  // Auto-scroll feature
   useEffect(() => {
-    // Execute only on client side
-    if (typeof window === 'undefined') return;
-    
-    // Enable auto-scroll for mobile only
-    const isMobile = window.innerWidth < 640; // sm breakpoint
+    if (typeof window === "undefined") return;
+    const isMobile = window.innerWidth < 640;
     if (!isMobile || fourposts.length <= 1) return;
 
     const scrollToNext = () => {
       if (!scrollContainerRef.current || isPaused) return;
-
       const container = scrollContainerRef.current;
       const containerWidth = container.offsetWidth;
-      const cardWidth = containerWidth * 0.85 + 16; // 85vw + gap (16px)
-      
-      // Calculate next index from current scroll position
+      const cardWidth = containerWidth * 0.85 + 16;
       const currentScrollLeft = container.scrollLeft;
       const currentIndex = Math.round(currentScrollLeft / cardWidth);
       const nextIndex = (currentIndex + 1) % fourposts.length;
       const scrollPosition = nextIndex * cardWidth;
-
-      container.scrollTo({
-        left: scrollPosition,
-        behavior: 'smooth',
-      });
-
+      container.scrollTo({ left: scrollPosition, behavior: "smooth" });
       setActiveIndex(nextIndex);
     };
 
-    // Auto-scroll every 5 seconds
     autoScrollIntervalRef.current = setInterval(scrollToNext, 5000);
 
     return () => {
-      if (autoScrollIntervalRef.current) {
-        clearInterval(autoScrollIntervalRef.current);
-      }
-      if (userScrollTimeoutRef.current) {
-        clearTimeout(userScrollTimeoutRef.current);
-      }
+      if (autoScrollIntervalRef.current) clearInterval(autoScrollIntervalRef.current);
+      if (userScrollTimeoutRef.current) clearTimeout(userScrollTimeoutRef.current);
     };
   }, [isPaused, fourposts.length]);
 
-  // Pause and resume when user manually scrolls
   const handleUserScroll = () => {
     setIsPaused(true);
-
-    // Clear existing timeout
-    if (userScrollTimeoutRef.current) {
-      clearTimeout(userScrollTimeoutRef.current);
-    }
-
-    // Resume auto-scroll after 3 seconds
-    userScrollTimeoutRef.current = setTimeout(() => {
-      setIsPaused(false);
-    }, 3000);
+    if (userScrollTimeoutRef.current) clearTimeout(userScrollTimeoutRef.current);
+    userScrollTimeoutRef.current = setTimeout(() => setIsPaused(false), 3000);
   };
+
+  const features = [
+    {
+      num: "01",
+      title: "100 Jaar\nErvaring",
+      desc: "Al een eeuw lang zijn wij toonaangevend in de atletiekwereld van Limburg.",
+    },
+    {
+      num: "02",
+      title: "Succesvolle\nAtleten",
+      desc: "Talloze nationale en internationale successen door onze getalenteerde atleten.",
+    },
+    {
+      num: "03",
+      title: "Professionele\nBegeleiding",
+      desc: "Ervaren trainers die jou helpen je doelen te bereiken, ongeacht je niveau.",
+    },
+    {
+      num: "04",
+      title: "Moderne\nFaciliteiten",
+      desc: "Uitstekende trainingsfaciliteiten voor alle atletiekdisciplines.",
+    },
+  ];
 
   return (
     <div className='min-h-screen'>
-      {/* Hero Section */}
-      <section className='relative h-72 md:h-screen bg-avon-black'>
+      {/* ── Hero ── */}
+      <section className='relative min-h-screen bg-ink overflow-hidden'>
         <div className='absolute inset-0'>
           <Image
             src='/images/entrance_emma.jpg'
             alt='AVON Heerlen Atletiekbaan'
             fill
-            className='object-cover opacity-60'
+            className='object-cover opacity-35'
             priority
           />
-          <div className='absolute inset-0 bg-gradient-to-r from-avon-black to-transparent'></div>
+          <div className='absolute inset-0 bg-gradient-to-r from-ink via-ink/75 to-transparent' />
+          <div className='absolute inset-0 bg-gradient-to-t from-ink/90 via-transparent to-transparent' />
         </div>
-        <div className='relative max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-full flex items-center'>
-          <div className='text-center md:text-left max-w-2xl flex flex-col items-center md:block w-full'>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className='text-4xl md:text-7xl font-bold text-avon-white mb-3 md:mb-4'
+
+        {/* Year watermark */}
+        <div className='absolute right-0 top-0 bottom-0 flex items-center pointer-events-none select-none pr-4 hidden lg:flex'>
+          <span
+            className='font-bold text-white/[0.04] leading-none'
+            style={{
+              fontFamily: "var(--font-barlow-condensed), sans-serif",
+              fontSize: "22vw",
+            }}
+          >
+            1924
+          </span>
+        </div>
+
+        <div className='relative max-w-7xl mx-auto px-6 lg:px-10 min-h-screen flex flex-col justify-center py-24'>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={mounted ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.35, delay: 0.1 }}
+            className='flex items-center gap-3 mb-6'
+          >
+            <div className='h-px w-10 bg-gold flex-shrink-0' />
+            <span
+              className='text-gold text-xs uppercase tracking-[0.3em] font-semibold'
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
-              AVON Heerlen
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className='hidden md:block text-2xl md:text-3xl text-avon-yellow mb-6'
-            >
-              De oudste atletiekvereniging van Limburg – sinds 1924
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className='hidden md:block text-xl text-avon-white mb-8'
-            >
-              Waar de geschiedenis van atletiek begon. Een eeuw vol sportieve
-              verhalen.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className='flex flex-col gap-2 md:gap-3 w-full max-w-sm mx-auto sm:max-w-none sm:flex-row sm:justify-center md:justify-start md:mx-0'
-            >
-              <Link
-                href='/contact'
-                className='btn-primary py-2.5 md:py-3 text-center w-full sm:w-auto sm:px-8 text-sm md:text-base'
-              >
-                Aanmelden
-              </Link>
-              <Link
-                href='/over-ons'
-                className='btn-secondary py-2.5 md:py-3 text-center w-full sm:w-auto sm:px-8 text-sm md:text-base'
-              >
-                Over ons
-              </Link>
-              <Link
-                href='/contact'
-                className='btn-secondary py-2.5 md:py-3 text-center w-full sm:w-auto sm:px-8 text-sm md:text-base'
-              >
-                Contact
-              </Link>
-            </motion.div>
-          </div>
+              Atletiekvereniging · Heerlen · Limburg
+            </span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 35 }}
+            animate={mounted ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.45, delay: 0.2 }}
+            className='text-white font-bold uppercase leading-[0.88] mb-6'
+            style={{
+              fontFamily: "var(--font-barlow-condensed), sans-serif",
+              fontSize: "clamp(4.5rem, 13vw, 10rem)",
+            }}
+          >
+            AVON<br />
+            <span className='text-gold'>Heerlen</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={mounted ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.38 }}
+            className='hidden md:block text-white/60 text-xl max-w-md mb-10 leading-relaxed'
+          >
+            De oudste atletiekvereniging van Limburg. Al 100 jaar het hart van atletiek in de regio.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={mounted ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.5 }}
+            className='flex flex-col gap-3 w-full max-w-xs sm:max-w-none sm:flex-row'
+          >
+            <Link href='/contact' className='btn-primary text-center'>
+              Aanmelden
+            </Link>
+            <Link href='/over-ons' className='btn-secondary text-center'>
+              Over ons
+            </Link>
+          </motion.div>
+
+          {/* Stats bar */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={mounted ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.75 }}
+            className='hidden md:flex gap-12 border-t border-white/15 pt-6 mt-16'
+          >
+            {[
+              { value: "100+", label: "Jaar" },
+              { value: "7", label: "Trainingsdagen" },
+              { value: "1924", label: "Opgericht" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <span
+                  className='font-bold text-gold leading-none'
+                  style={{
+                    fontFamily: "var(--font-barlow-condensed), sans-serif",
+                    fontSize: "2.5rem",
+                  }}
+                >
+                  {stat.value}
+                </span>
+                <span
+                  className='block text-white/40 text-xs uppercase tracking-widest mt-1'
+                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                >
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* News Section */}
-      <section className='py-16 bg-avon-white'>
-        <div className='max-w-7xl mx-auto px-2 sm:px-4 lg:px-8'>
-          <div className='flex justify-between items-center mb-8'>
-            <h2 className='text-3xl font-bold text-avon-black'>
-              Laatste Nieuws
-            </h2>
+      {/* ── News ── */}
+      <section className='py-20 bg-smoke'>
+        <div className='max-w-7xl mx-auto px-6 lg:px-10'>
+          <div className='flex justify-between items-end mb-12'>
+            <div>
+              <div className='flex items-center gap-3 mb-3'>
+                <div className='h-px w-8 bg-gold flex-shrink-0' />
+                <span
+                  className='text-mid text-xs uppercase tracking-[0.25em] font-semibold'
+                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                >
+                  Nieuws
+                </span>
+              </div>
+              <h2
+                className='font-bold text-ink uppercase leading-[0.9]'
+                style={{
+                  fontFamily: "var(--font-barlow-condensed), sans-serif",
+                  fontSize: "clamp(2.5rem, 5vw, 4rem)",
+                }}
+              >
+                Laatste<br />Nieuws
+              </h2>
+            </div>
             <Link
               href='/nieuws'
-              className='text-avon-yellow hover:text-avon-black transition-colors font-semibold'
+              className='hidden sm:flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gold hover:text-ink transition-colors group'
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
-              Bekijk alle nieuws →
+              Alles zien
+              <span className='group-hover:translate-x-1 transition-transform'>→</span>
             </Link>
           </div>
-          {/* Mobile version: Horizontal scroll carousel */}
-          <div 
+
+          {/* Mobile: Horizontal scroll carousel */}
+          <div
             className='sm:hidden'
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
             onTouchStart={() => setIsPaused(true)}
-            onTouchEnd={() => {
-              setTimeout(() => setIsPaused(false), 3000);
-            }}
+            onTouchEnd={() => setTimeout(() => setIsPaused(false), 3000)}
           >
             <div
               ref={scrollContainerRef}
-              className='flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-2 sm:-mx-4 lg:-mx-8 px-2 sm:px-4 lg:px-8 scrollbar-hide'
+              className='flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-6 px-6 scrollbar-hide'
               onScroll={(e) => {
                 const container = e.currentTarget;
-                const scrollLeft = container.scrollLeft;
-                const containerWidth = container.offsetWidth;
-                const cardWidth = containerWidth * 0.85 + 16; // 85vw + gap (16px)
+                const cardWidth = container.offsetWidth * 0.85 + 16;
                 const newIndex = Math.min(
-                  Math.round(scrollLeft / cardWidth),
+                  Math.round(container.scrollLeft / cardWidth),
                   fourposts.length - 1
                 );
                 setActiveIndex(newIndex);
                 handleUserScroll();
               }}
             >
-              {fourposts.map((post, index) => (
-                <div
-                  key={post.id}
-                  className='flex-shrink-0 w-[85vw] snap-start'
-                >
+              {fourposts.map((post) => (
+                <div key={post.id} className='flex-shrink-0 w-[85vw] snap-start'>
                   <NewsCard
                     title={post.title}
                     description={post.description}
@@ -208,22 +263,19 @@ export default function HomeClient({ data }: HomeClientProps) {
                 </div>
               ))}
             </div>
-            {/* Scroll indicator */}
-            <div className='flex justify-center gap-2 mt-4 sm:hidden'>
+            <div className='flex justify-center gap-2 mt-4'>
               {fourposts.map((_, index) => (
                 <div
                   key={index}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === activeIndex
-                      ? 'bg-avon-yellow w-6'
-                      : 'bg-gray-300'
+                  className={`h-1 rounded-full transition-all duration-300 ${
+                    index === activeIndex ? "bg-gold w-6" : "bg-mid/40 w-2"
                   }`}
                 />
               ))}
             </div>
           </div>
 
-          {/* Desktop version: Grid layout */}
+          {/* Desktop: Grid */}
           <div className='hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
             {fourposts.map((post) => (
               <NewsCard
@@ -240,48 +292,65 @@ export default function HomeClient({ data }: HomeClientProps) {
         </div>
       </section>
 
-      {/* About Us Section */}
-      <section className='py-16 bg-gray-100'>
-        <div className='max-w-7xl mx-auto px-2 sm:px-4 lg:px-8'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center'>
+      {/* ── About ── */}
+      <section className='py-20 bg-white'>
+        <div className='max-w-7xl mx-auto px-6 lg:px-10'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center'>
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={mounted ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.45 }}
               viewport={{ once: true }}
-              className='relative h-96 rounded-lg overflow-hidden shadow-xl'
+              className='relative'
             >
-              <Image
-                src='/images/entrance.jpeg'
-                alt='AVON Heerlen Geschiedenis'
-                fill
-                className='object-cover'
-              />
+              <div className='relative h-[440px] overflow-hidden'>
+                <Image
+                  src='/images/entrance.jpeg'
+                  alt='AVON Heerlen Geschiedenis'
+                  fill
+                  className='object-cover'
+                />
+              </div>
+              {/* Gold corner accent */}
+              <div className='absolute bottom-0 right-0 w-16 h-16 bg-gold' />
             </motion.div>
+
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={mounted ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.45 }}
               viewport={{ once: true }}
             >
-              <h2 className='text-3xl font-bold text-avon-black mb-4'>
-                Over AVON Heerlen
+              <div className='flex items-center gap-3 mb-4'>
+                <div className='h-px w-8 bg-gold flex-shrink-0' />
+                <span
+                  className='text-mid text-xs uppercase tracking-[0.25em] font-semibold'
+                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                >
+                  Ons verhaal
+                </span>
+              </div>
+              <h2
+                className='font-bold text-ink uppercase leading-[0.9] mb-6'
+                style={{
+                  fontFamily: "var(--font-barlow-condensed), sans-serif",
+                  fontSize: "clamp(2.5rem, 5vw, 4rem)",
+                }}
+              >
+                Over AVON<br />Heerlen
               </h2>
-              <p className='text-lg mb-4'>
+              <p className='text-lg mb-4 text-gray-600 leading-relaxed'>
                 AVON Heerlen is de oudste atletiekvereniging van Limburg,
                 opgericht in 1924. Al 100 jaar zijn wij een thuis voor atleten
                 van alle niveaus.
               </p>
-              <p className='text-lg mb-6'>
+              <p className='text-lg mb-8 text-gray-600 leading-relaxed'>
                 Onze vereniging biedt een breed scala aan atletiekdisciplines
                 aan, van sprint tot marathon, van verspringen tot kogelstoten.
                 Met ervaren trainers en moderne faciliteiten helpen we onze
                 leden hun doelen te bereiken.
               </p>
-              <Link
-                href='/over-ons'
-                className='btn-primary inline-block'
-              >
+              <Link href='/over-ons' className='btn-primary'>
                 Lees meer over ons
               </Link>
             </motion.div>
@@ -289,94 +358,63 @@ export default function HomeClient({ data }: HomeClientProps) {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className='py-16 bg-avon-white'>
-        <div className='max-w-7xl mx-auto px-2 sm:px-4 lg:px-8'>
-          <div className='text-center mb-12'>
-            <h2 className='text-3xl font-bold text-avon-black mb-4'>
-              Waarom AVON Heerlen?
-            </h2>
-            <p className='text-lg text-gray-600 max-w-3xl mx-auto'>
-              Ontdek wat AVON Heerlen uniek maakt en waarom wij al 100 jaar
-              toonaangevend zijn in de atletiekwereld.
-            </p>
+      {/* ── Features ── */}
+      <section className='py-20 bg-ink'>
+        <div className='max-w-7xl mx-auto px-6 lg:px-10'>
+          <div className='flex items-center gap-3 mb-4'>
+            <div className='h-px w-8 bg-gold flex-shrink-0' />
+            <span
+              className='text-white/40 text-xs uppercase tracking-[0.25em] font-semibold'
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              Waarom AVON
+            </span>
           </div>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className='text-center'
-            >
-              <div className='bg-avon-black rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4'>
-                <FaHistory className='text-avon-yellow text-2xl' />
-              </div>
-              <h3 className='text-xl font-bold text-avon-black mb-2'>
-                100 Jaar Ervaring
-              </h3>
-              <p className='text-gray-600'>
-                Al een eeuw lang zijn wij toonaangevend in de atletiekwereld
-                van Limburg.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-              className='text-center'
-            >
-              <div className='bg-avon-black rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4'>
-                <FaTrophy className='text-avon-yellow text-2xl' />
-              </div>
-              <h3 className='text-xl font-bold text-avon-black mb-2'>
-                Succesvolle Atleten
-              </h3>
-              <p className='text-gray-600'>
-                Talloze nationale en internationale successen door onze
-                getalenteerde atleten.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              className='text-center'
-            >
-              <div className='bg-avon-black rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4'>
-                <FaUsers className='text-avon-yellow text-2xl' />
-              </div>
-              <h3 className='text-xl font-bold text-avon-black mb-2'>
-                Professionele Begeleiding
-              </h3>
-              <p className='text-gray-600'>
-                Ervaren trainers die jou helpen je doelen te bereiken, ongeacht
-                je niveau.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-              className='text-center'
-            >
-              <div className='bg-avon-black rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4'>
-                <FaRunning className='text-avon-yellow text-2xl' />
-              </div>
-              <h3 className='text-xl font-bold text-avon-black mb-2'>
-                Moderne Faciliteiten
-              </h3>
-              <p className='text-gray-600'>
-                Uitstekende trainingsfaciliteiten voor alle atletiekdisciplines.
-              </p>
-            </motion.div>
+          <h2
+            className='font-bold text-white uppercase leading-[0.9] mb-16'
+            style={{
+              fontFamily: "var(--font-barlow-condensed), sans-serif",
+              fontSize: "clamp(2.5rem, 5vw, 4rem)",
+            }}
+          >
+            Waarom AVON<br />Heerlen?
+          </h2>
+
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10'>
+            {features.map((item, i) => (
+              <motion.div
+                key={item.num}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                viewport={{ once: true }}
+                className='bg-ash p-8 group hover:bg-white/5 transition-colors'
+              >
+                <div
+                  className='text-gold/25 font-bold leading-none mb-4 group-hover:text-gold/40 transition-colors'
+                  style={{
+                    fontFamily: "var(--font-barlow-condensed), sans-serif",
+                    fontSize: "5rem",
+                  }}
+                >
+                  {item.num}
+                </div>
+                <h3
+                  className='text-white font-bold uppercase mb-3 leading-tight whitespace-pre-line'
+                  style={{
+                    fontFamily: "var(--font-barlow-condensed), sans-serif",
+                    fontSize: "1.5rem",
+                  }}
+                >
+                  {item.title}
+                </h3>
+                <p className='text-white/45 text-sm leading-relaxed'>{item.desc}</p>
+                <div className='mt-6 h-px w-8 bg-gold/40 group-hover:w-14 group-hover:bg-gold transition-all duration-300' />
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
     </div>
   );
 }
-
