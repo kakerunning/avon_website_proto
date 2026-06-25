@@ -164,6 +164,8 @@ I still want to add the functions to this project
 - [] the club record list with CMS integration
 - [] the membership subscription registration with stripe
 
+---
+
 ## License
 
 MIT — see [LICENSE](LICENSE) for details.
