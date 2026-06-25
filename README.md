@@ -6,8 +6,21 @@ A modern, production-ready website built for **AVON Heerlen**, a Dutch athletics
 
 ## Live Demo
 
-<!-- Add your deployed URL here, e.g. https://avon-heerlen.vercel.app -->
-_Coming soon / [Add Vercel URL here]_
+- [[Vercel URL](https://avon-website-proto.vercel.app/)]
+The news cards on the home page are fetched by Notion API from Notion Database. 
+<img width="1274" height="662" alt="image" src="https://github.com/user-attachments/assets/2399c664-e5c5-4821-8fd2-82a836eebab8" />
+
+- [[News List](https://avon-website-proto.vercel.app/nieuws)]
+<img width="1482" height="924" alt="image" src="https://github.com/user-attachments/assets/bc31fdc3-9a2c-474e-9eb8-089acf78ee23" />
+
+- [[Example news article](https://avon-website-proto.vercel.app/nieuws/trackmeeting_breda2025)]
+<img width="1112" height="946" alt="image" src="https://github.com/user-attachments/assets/f654e0fe-794b-42a7-b6e9-b502b6c54e6b" />
+
+- [The contents in Notion Database]
+<img width="2832" height="1218" alt="image" src="https://github.com/user-attachments/assets/76468494-01a4-472e-873d-30f54f70f360" />
+
+- [The example article in Notion page]
+<img width="570" height="890" alt="image" src="https://github.com/user-attachments/assets/a984d262-c58a-47d0-a105-b6c5d4cb0ba9" />
 
 ---
 
