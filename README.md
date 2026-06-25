@@ -1,5 +1,5 @@
-# AVON Heerlen — Official Club Website
-
+# AVON Heerlen — Update Official Club Website
+[[the current website](https://www.avonheerlen.nl/)]
 A modern, production-ready website built for **AVON Heerlen**, a Dutch athletics club. This project demonstrates a full-featured Next.js application with a headless CMS integration, responsive design, and smooth animations.
 
 > **Portfolio project** — built to showcase front-end and full-stack skills with modern web technologies.
