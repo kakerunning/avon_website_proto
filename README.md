@@ -75,7 +75,6 @@ avon_website/
 │   ├── contact/page.tsx           # Contact page
 │   ├── layout.tsx
 │   └── page.tsx                   # Home page
-├── components/TrainingSchedule/   # Reusable schedule components
 ├── lib/notion.ts                  # Notion client + data fetching
 ├── types/                         # Shared TypeScript types
 ├── public/images/
@@ -96,8 +95,8 @@ avon_website/
 1. Clone the repository
 
 ```bash
-git clone [https://github.com/your-username/avon-website.git](https://github.com/kakerunning/avon_website_proto.git)
-cd avon-website
+git clone https://github.com/kakerunning/avon_website_proto.git
+cd avon_website_proto
 ```
 
 2. Install dependencies
