@@ -65,7 +65,8 @@ avon_website/
 │   ├── components/                # Shared UI components
 │   │   ├── Navigation.tsx
 │   │   ├── NewsCard.tsx
-│   │   └── Footer.tsx
+│   │   ├── Footer.tsx
+│   │   └── TrainingSchedule/      # Feature module: DayAccordion, TrainingCard, Tag      
 │   ├── nieuws/
 │   │   ├── page.tsx               # News index page
 │   │   └── [slug]/page.tsx        # Dynamic news detail (SSG)
