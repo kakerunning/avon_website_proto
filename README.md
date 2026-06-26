@@ -159,7 +159,7 @@ This project is optimized for deployment on **Vercel**. Set the following enviro
 ---
 
 ## Roadmap
-- [ ] to fix the first-loaded image from the Notion Database
+- [ ] to fix the first-loaded image from the Notion Database\
 It is caused by the fact that Notion serves images as expiring S3 presigned URLs, which appear blank on initial load.
 
 - [ ] the club record list with CMS integration
